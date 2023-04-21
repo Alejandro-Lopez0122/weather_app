@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import NewsAPI from './NewsAPI';
+import WeatherAPI from './WeatherAPI';
+import WeatherSearchBar from './WeatherSearchBar';
 
 function App() {
+  const [city, setCity] = useState('Los Angeles');
+  const [cityInput, setCityInput] = useState('');
+
+  function handleSearch(city) {
+    setCity(city);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <WeatherAPI city={city} />
+      <WeatherSearchBar
+        cityInput={cityInput}
+        setCityInput={setCityInput}
+        handleSearch={handleSearch}
+      /><br></br>
+      <NewsAPI city={city} />
     </div>
   );
 }
